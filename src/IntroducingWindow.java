@@ -9,6 +9,7 @@ public class IntroducingWindow extends BasicWindow {
 
     private final static int BUTTON_WIDTH = 200;
     private final static int BUTTON_HEIGHT = 50;
+    private final static float BUTTON_DISTANCE_FACTOR = 1.5f;
 
     public IntroducingWindow(BasicWindow nextWindow) {
         super("2048 - Introducing Window", 400, nextWindow);
@@ -61,7 +62,7 @@ public class IntroducingWindow extends BasicWindow {
     public void setButtonsLocation() {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setLocation((windowSize - BUTTON_WIDTH) / 2,
-                    (windowSize - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (1.5 * BUTTON_HEIGHT));
+                    (windowSize - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (BUTTON_DISTANCE_FACTOR * BUTTON_HEIGHT));
         }
     }
 }

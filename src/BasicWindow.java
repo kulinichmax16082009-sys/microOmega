@@ -25,6 +25,7 @@ public class BasicWindow {
         frame.setVisible(false);
     }
 
+    //TODO: handle next window exceptions like null pointer exception
     public void showNextWindow() {
         hide();
         nextWindow.show();

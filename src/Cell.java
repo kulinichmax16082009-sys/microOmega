@@ -9,6 +9,7 @@ public class Cell {
         initializeColor();
     }
 
+    //TODO: use json to store colors and read from it instead of hardcoding
     private void initializeColor() {
         switch (value) {
             case 2: color = new Color(238, 228, 218);

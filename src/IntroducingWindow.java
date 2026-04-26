@@ -2,24 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class IntroducingWindow {
-
-    private final JFrame frame;
+public class IntroducingWindow extends BasicWindow {
 
     //TODO: json file for settings
     private ArrayList<JButton> buttons;
-    private final static int WINDOW_SIZE = 400;
+
     private final static int BUTTON_WIDTH = 200;
     private final static int BUTTON_HEIGHT = 50;
 
-    public IntroducingWindow() {
-        frame = new JFrame("2048 - Introducing Window");
-
-        //Frame settings
-        frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-
+    public IntroducingWindow(BasicWindow nextWindow) {
+        super("2048 - Introducing Window", 400, nextWindow);
         initButtons();
         setButtonsLocation();
 
@@ -27,8 +19,6 @@ public class IntroducingWindow {
         frame.pack();
 
         frame.setLocationRelativeTo(null);
-
-        frame.setVisible(false);
     }
 
     public void initButtons() {
@@ -36,7 +26,7 @@ public class IntroducingWindow {
 
         JPanel buttonPanel = new JPanel(null);
 
-        buttonPanel.setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE));
+        buttonPanel.setPreferredSize(new Dimension(windowSize, windowSize));
 
         JButton start = new JButton("START");
         JButton load = new JButton("LOAD");
@@ -51,8 +41,12 @@ public class IntroducingWindow {
         }
 
         start.addActionListener(e -> {
-            new GameWindow();
-            frame.dispose();
+            showNextWindow();
+        });
+
+        //TODO: implement load button
+        load.addActionListener(e -> {
+            System.out.println("Load button clicked");
         });
 
         quit.addActionListener(e -> System.exit(0));
@@ -66,17 +60,8 @@ public class IntroducingWindow {
 
     public void setButtonsLocation() {
         for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setLocation((WINDOW_SIZE - BUTTON_WIDTH) / 2,
-                    (WINDOW_SIZE - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int)(1.5 * BUTTON_HEIGHT));
+            buttons.get(i).setLocation((windowSize - BUTTON_WIDTH) / 2,
+                    (windowSize - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (1.5 * BUTTON_HEIGHT));
         }
-    }
-
-    //TODO: add some abstract class for windows and move this method there
-    public void show() {
-        frame.setVisible(true);
-    }
-
-    public void showNextWindow() {
-        frame.dispose();
     }
 }

@@ -37,4 +37,12 @@ public class GamePanel extends JPanel {
 
         repaint();
     }
+
+    public BoardManager getBoardManager() {
+        return boardManager;
+    }
+
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = boardManager;
+    }
 }

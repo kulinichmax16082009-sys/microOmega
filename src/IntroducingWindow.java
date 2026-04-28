@@ -6,6 +6,7 @@ public class IntroducingWindow extends BasicWindow {
 
     //TODO: json file for settings
     private ArrayList<JButton> buttons;
+    private boolean isGameStarted;
 
     private final static int BUTTON_WIDTH = 200;
     private final static int BUTTON_HEIGHT = 50;
@@ -37,7 +38,10 @@ public class IntroducingWindow extends BasicWindow {
         buttons.add(load);
         buttons.add(quit);
 
-        start.addActionListener(e -> showNextWindow());
+        start.addActionListener(e -> {
+            showNextWindow();
+            isGameStarted = true;
+        });
 
         //TODO: implement load button
         load.addActionListener(e -> System.out.println("Load button clicked"));
@@ -68,5 +72,9 @@ public class IntroducingWindow extends BasicWindow {
         titleLabel.setOpaque(true);
         titleLabel.setBackground(new Color(195, 196, 195));
         frame.add(titleLabel, BorderLayout.NORTH);
+    }
+
+    public boolean isGameStarted() {
+        return isGameStarted;
     }
 }

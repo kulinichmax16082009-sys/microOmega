@@ -18,7 +18,6 @@ public class IntroducingWindow extends BasicWindow {
 
         //Final settings
         frame.pack();
-
         frame.setLocationRelativeTo(null);
     }
 
@@ -26,7 +25,6 @@ public class IntroducingWindow extends BasicWindow {
         buttons = new ArrayList<>();
 
         JPanel buttonPanel = new JPanel(null);
-
         buttonPanel.setPreferredSize(new Dimension(windowSize, windowSize));
 
         JButton start = new JButton("START");
@@ -37,20 +35,16 @@ public class IntroducingWindow extends BasicWindow {
         buttons.add(load);
         buttons.add(quit);
 
+        start.addActionListener(e -> showNextWindow());
+
+        //TODO: implement load button
+        load.addActionListener(e -> System.out.println("Load button clicked"));
+
+        quit.addActionListener(e -> System.exit(0));
+
         for (JButton button : buttons) {
             button.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
         }
-
-        start.addActionListener(e -> {
-            showNextWindow();
-        });
-
-        //TODO: implement load button
-        load.addActionListener(e -> {
-            System.out.println("Load button clicked");
-        });
-
-        quit.addActionListener(e -> System.exit(0));
 
         for (JButton button : buttons) {
             buttonPanel.add(button);

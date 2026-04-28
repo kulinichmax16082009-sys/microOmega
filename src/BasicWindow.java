@@ -5,8 +5,9 @@ public class BasicWindow {
     protected JFrame frame;
     protected BasicWindow nextWindow;
     protected int windowSize;
+    protected String imagePath;
 
-    public BasicWindow(String title, int windowSize, BasicWindow nextWindow) {
+    public BasicWindow(String title, int windowSize, BasicWindow nextWindow, String imagePath) {
         this.windowSize = windowSize;
         this.nextWindow = nextWindow;
 
@@ -15,6 +16,7 @@ public class BasicWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(false);
+        frame.setIconImage(new ImageIcon(imagePath).getImage());
     }
 
     public void show() {

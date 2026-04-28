@@ -13,6 +13,8 @@ public class IntroducingWindow extends BasicWindow {
 
     public IntroducingWindow(BasicWindow nextWindow) {
         super("2048 - Introducing Window", 400, nextWindow);
+
+        initTitleLabel();
         initButtons();
         setButtonsLocation();
 
@@ -58,5 +60,13 @@ public class IntroducingWindow extends BasicWindow {
             buttons.get(i).setLocation((windowSize - BUTTON_WIDTH) / 2,
                     (windowSize - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (BUTTON_DISTANCE_FACTOR * BUTTON_HEIGHT));
         }
+    }
+
+    public void initTitleLabel() {
+        JLabel titleLabel = new JLabel("2048", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 70));
+        titleLabel.setOpaque(true);
+        titleLabel.setBackground(new Color(195, 196, 195));
+        frame.add(titleLabel, BorderLayout.NORTH);
     }
 }

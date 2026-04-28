@@ -11,6 +11,21 @@ public class Player {
         this.score += points;
     }
 
+    public void startTimer() {
+        if (time < 0) return;
+        new Thread(() -> {
+            try {
+                while (true) {
+                    time++;
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
+    }
+
+
     public int getScore() {
         return score;
     }

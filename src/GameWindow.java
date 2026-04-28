@@ -32,6 +32,22 @@ public class GameWindow extends BasicWindow {
     }
 
     public void updateLabel(int score, long time) {
-        scoreLabel.setText("Score: " + score + " | Time: " + time + " s");
+        if (time >= 60) {
+            long minutes = 0;
+            long seconds = time;
+
+            while (seconds >= 60) {
+                seconds -= 60;
+                minutes++;
+            }
+            scoreLabel.setText("Score: " + score + " | Time: " + minutes + " min " + seconds + " s");
+
+        } else {
+            scoreLabel.setText("Score: " + score + " | Time: " + time + " s");
+        }
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 }

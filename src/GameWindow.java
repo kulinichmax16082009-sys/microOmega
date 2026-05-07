@@ -11,7 +11,7 @@ public class GameWindow extends BasicWindow {
     public final static int GAP_SIZE = 12;
 
     public GameWindow(BasicWindow nextWindow) {
-        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), nextWindow);
+        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), nextWindow, "");
         gamePanel = new GamePanel();
         gamePanel.setPreferredSize(new Dimension(windowSize, windowSize));
 

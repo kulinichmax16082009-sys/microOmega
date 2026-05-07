@@ -14,14 +14,15 @@ public class Game {
 
         introducingWindow.show();
 
-        while (!introducingWindow.isGameStarted()) {
-            System.out.println("Waiting for the game to start...");
-        }
+//        while (!introducingWindow.isGameStarted()) {
+//            System.out.println("Waiting for the game to start...");
+//        }
 
         player.startTimer();
 
         while (true) {
             gameWindow.updateLabel(player.getScore(), player.getTime());
+            gameWindow.getGamePanel().getBoardManager().addRandomCell(new RandomGenerator());
         }
     }
 }

@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
                 g.fillRoundRect(x, y, GameWindow.CELL_SIZE, GameWindow.CELL_SIZE, 15, 15);
 
                 g.setColor(boardManager.getBoard()[i][j].getValue() <= 4 ? new Color(0x776e65) : Color.WHITE);
-                g.setFont(new Font("Arial Bold", Font.BOLD, 38));
+                g.setFont(new Font("Arial", Font.BOLD, 38));
                 if (boardManager.getBoard()[i][j].getValue() != 0) {
                     String s = String.valueOf(boardManager.getBoard()[i][j].getValue());
                     FontMetrics fm = g.getFontMetrics();

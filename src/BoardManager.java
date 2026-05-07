@@ -10,7 +10,7 @@ public class BoardManager {
     public void initBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Cell(8);
+                board[i][j] = new Cell(0);
             }
         }
     }
@@ -45,7 +45,7 @@ public class BoardManager {
     public boolean isFull() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].getValue() == 0 && !isAnySameCell()) {
+                if (!isCellEmpty(j,i) && !isAnySameCell()) {
                     return false;
                 }
             }
@@ -62,6 +62,28 @@ public class BoardManager {
             }
         }
         return false;
+    }
+
+    public void addRandomCell(RandomGenerator rnd) {
+        int x,y;
+
+        x = rnd.randomNumber(0, board.length - 1);
+        y = rnd.randomNumber(0, board.length - 1);
+
+        while (!isCellEmpty(x,y)) {
+            x = rnd.randomNumber(0, board.length - 1);
+            y = rnd.randomNumber(0, board.length - 1);
+        }
+
+        if (rnd.generateProbability(35)) {
+            board[y][x] = new Cell(2);
+        } else {
+            board[y][x] = new Cell(4);
+        }
+    }
+
+    public boolean isCellEmpty(int x, int y) {
+        return board[y][x].getValue() == 0;
     }
 
     public Cell[][] getBoard() {

@@ -1,28 +1,34 @@
-public class Game {
+import javax.swing.*;
+
+public class Game implements StartListener {
     private IntroducingWindow introducingWindow;
     private GameWindow gameWindow;
-    private EndWindow endWindow;
+    private Player player;
 
     public Game() {
-        endWindow = new EndWindow(null);
-        gameWindow = new GameWindow(endWindow);
-        introducingWindow = new IntroducingWindow(gameWindow);
+        this.player = new Player();
     }
 
     public void play() {
-        Player player = new Player();
+        introducingWindow = new IntroducingWindow(this);
+    }
 
-        introducingWindow.show();
+    @Override
+    public void onStart() {
+        introducingWindow.close();
 
-//        while (!introducingWindow.isGameStarted()) {
-//            System.out.println("Waiting for the game to start...");
-//        }
+        gameWindow = new GameWindow();
 
-        player.startTimer();
+        gameLoop();
+    }
 
-        while (true) {
+    public void gameLoop() {
+        Timer timer = new Timer(1000, e -> {
+            player.tickTime();
             gameWindow.updateLabel(player.getScore(), player.getTime());
-            gameWindow.getGamePanel().getBoardManager().addRandomCell(new RandomGenerator());
-        }
+            gameWindow.getGamePanel().repaint();
+        });
+
+        timer.start();
     }
 }

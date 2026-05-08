@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class Player {
     private int score;
     private long time;
@@ -11,18 +13,8 @@ public class Player {
         this.score += points;
     }
 
-    public void startTimer() {
-        if (time < 0) return;
-        new Thread(() -> {
-            try {
-                while (true) {
-                    time++;
-                    Thread.sleep(1000);
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }).start();
+    public void tickTime() {
+        this.time++;
     }
 
 

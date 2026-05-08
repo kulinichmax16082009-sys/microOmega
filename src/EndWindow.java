@@ -1,5 +1,5 @@
 public class EndWindow extends BasicWindow {
     public EndWindow() {
-        super("2048 - End Window", 200,"");
+        super("2048 - End Window", 200,"resources/icons/endingWindowIcon.jpg");
     }
 }

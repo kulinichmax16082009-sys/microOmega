@@ -13,7 +13,7 @@ public class IntroducingWindow extends BasicWindow {
     private final static float BUTTON_DISTANCE_FACTOR = 1.5f;
 
     public IntroducingWindow(StartListener startListener) {
-        super("2048 - Introducing Window", 400,"");
+        super("2048 - Introducing Window", 400,"resources/icons/introducingWindowIcon.png");
         this.startListener = startListener;
 
         initTitleLabel();

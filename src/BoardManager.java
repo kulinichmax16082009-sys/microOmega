@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class BoardManager {
     private Cell[][] board;
 
@@ -45,7 +43,7 @@ public class BoardManager {
     public boolean isFull() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (!isCellEmpty(j,i) && !isAnySameCell()) {
+                if (isCellEmpty(j, i) && !isAnySameCell()) {
                     return false;
                 }
             }
@@ -67,15 +65,12 @@ public class BoardManager {
     public void addRandomCell(RandomGenerator rnd) {
         int x,y;
 
-        x = rnd.randomNumber(0, board.length - 1);
-        y = rnd.randomNumber(0, board.length - 1);
-
-        while (!isCellEmpty(x,y)) {
+        do {
             x = rnd.randomNumber(0, board.length - 1);
             y = rnd.randomNumber(0, board.length - 1);
-        }
+        } while (isCellEmpty(x, y));
 
-        if (rnd.generateProbability(35)) {
+        if (rnd.generateProbability(90)) {
             board[y][x] = new Cell(2);
         } else {
             board[y][x] = new Cell(4);

@@ -68,7 +68,7 @@ public class BoardManager {
         do {
             x = rnd.randomNumber(0, board.length - 1);
             y = rnd.randomNumber(0, board.length - 1);
-        } while (isCellEmpty(x, y));
+        } while (!isCellEmpty(x, y));
 
         if (rnd.generateProbability(90)) {
             board[y][x] = new Cell(2);

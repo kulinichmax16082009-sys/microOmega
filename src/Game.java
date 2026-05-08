@@ -3,10 +3,16 @@ import javax.swing.*;
 public class Game implements StartListener {
     private IntroducingWindow introducingWindow;
     private GameWindow gameWindow;
+    private GamePanel gamePanel;
+
+    private BoardManager boardManager;
     private Player player;
 
     public Game() {
         this.player = new Player();
+        this.boardManager = new BoardManager(GameWindow.CELLS_COUNT);
+        this.boardManager.initBoard();
+        this.gamePanel = new GamePanel(boardManager);
     }
 
     public void play() {
@@ -17,12 +23,15 @@ public class Game implements StartListener {
     public void onStart() {
         introducingWindow.close();
 
-        gameWindow = new GameWindow();
+        boardManager.addRandomCell(new RandomGenerator());
+        boardManager.addRandomCell(new RandomGenerator());
 
-        gameLoop();
+        gameWindow = new GameWindow(gamePanel);
+
+        startTimer();
     }
 
-    public void gameLoop() {
+    public void startTimer() {
         Timer timer = new Timer(1000, e -> {
             player.tickTime();
             gameWindow.updateLabel(player.getScore(), player.getTime());

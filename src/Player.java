@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 public class Player {
     private int score;
     private long time;
@@ -16,7 +14,6 @@ public class Player {
     public void tickTime() {
         this.time++;
     }
-
 
     public int getScore() {
         return score;

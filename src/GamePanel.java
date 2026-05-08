@@ -4,9 +4,8 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     private BoardManager boardManager;
 
-    public GamePanel() {
-        boardManager = new BoardManager(GameWindow.CELLS_COUNT);
-        boardManager.initBoard();
+    public GamePanel(BoardManager boardManager) {
+        this.boardManager = boardManager;
     }
 
     @Override

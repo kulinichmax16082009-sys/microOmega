@@ -22,6 +22,7 @@ public class BoardManager {
         boolean moved = false;
 
         for (int i = 0; i < board.length; i++) {
+            boolean merged = false;
             for (int j = 0; j < board[i].length; j++) {
 
                 int k = j;
@@ -31,11 +32,11 @@ public class BoardManager {
                         board[i][k - 1] = board[i][k];
                         board[i][k] = new Cell(0);
                         moved = true;
-                    } else if (board[i][k - 1].compareTo(board[i][k]) == 0) {
+                    } else if (board[i][k - 1].compareTo(board[i][k]) == 0 && !merged) {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
                         moved = true;
-                        break;
+                        merged = true;
                     }
                     k--;
                 }

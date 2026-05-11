@@ -29,6 +29,8 @@ public class Game implements StartListener {
         gameWindow = new GameWindow(gamePanel);
 
         startTimer();
+
+        //You can add some code here
     }
 
     public void startTimer() {

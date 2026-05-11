@@ -61,4 +61,6 @@ public class Cell {
     public String toString() {
         return "Value: " + value + ", color: " + color;
     }
+
+    //TODO: add compareTo method to compare cells by value
 }

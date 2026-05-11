@@ -13,6 +13,56 @@ public class BoardManager {
         }
     }
 
+    public void moveCellsRight() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+
+                int k = j;
+
+                while (k > 0 && board[i][k].getValue() != 0) {
+                    if (board[i][k - 1].getValue() == 0) {
+                        board[i][k - 1] = board[i][k];
+                        board[i][k] = new Cell(0);
+                    } else if (board[i][k - 1].getValue() == board[i][k].getValue()) {
+                        board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
+                        board[i][k] = new Cell(0);
+                    }
+                    k--;
+                }
+            }
+        }
+    }
+
+    public void moveCellsLeft() {
+        for (int i = 0; i < 2; i++) rotate90Degree();
+        moveCellsRight();
+        for (int i = 0; i < 2; i++) rotate90Degree();
+    }
+
+    public void moveCellsUp() {
+        for (int i = 0; i < 3; i++) rotate90Degree();
+        moveCellsRight();
+        rotate90Degree();
+    }
+
+    public void moveCellsDown() {
+        rotate90Degree();
+        moveCellsRight();
+        for (int i = 0; i < 3; i++) rotate90Degree();
+    }
+
+    public void rotate90Degree() {
+        Cell[][] newBoard = new Cell[board.length][board.length];
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                newBoard[j][board[i].length - 1 - i] = board[i][j];
+            }
+        }
+
+        board = newBoard;
+    }
+
     public int[][] initDirections() {
         return new int[][] { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
     }
@@ -83,9 +133,5 @@ public class BoardManager {
 
     public Cell[][] getBoard() {
         return board;
-    }
-
-    public void setBoard(Cell[][] board) {
-        this.board = board;
     }
 }

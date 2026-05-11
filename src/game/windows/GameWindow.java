@@ -22,6 +22,8 @@ public class GameWindow extends BasicWindow {
         frame.add(scoreLabel, BorderLayout.NORTH);
         frame.add(this.gamePanel);
 
+        gamePanel.requestFocusInWindow();
+
         //Final settings
         frame.pack();
         frame.setLocationRelativeTo(null);

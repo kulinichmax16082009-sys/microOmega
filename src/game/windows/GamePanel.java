@@ -1,6 +1,7 @@
 package game.windows;
 
 import game.gameUtils.BoardManager;
+import game.gameUtils.MyKeyAdapter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,8 @@ public class GamePanel extends JPanel {
 
     public GamePanel(BoardManager boardManager) {
         this.boardManager = boardManager;
+        initKeyListener();
+        setFocusable(true);
     }
 
     @Override
@@ -39,5 +42,9 @@ public class GamePanel extends JPanel {
         }
 
         repaint();
+    }
+
+    public void initKeyListener() {
+        addKeyListener(new MyKeyAdapter(boardManager));
     }
 }

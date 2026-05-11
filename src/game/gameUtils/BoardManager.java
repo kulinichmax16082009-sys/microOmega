@@ -18,7 +18,9 @@ public class BoardManager {
         }
     }
 
-    public void moveCellsRight() {
+    public boolean moveCellsLeft() {
+        boolean moved = false;
+
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
 
@@ -28,32 +30,41 @@ public class BoardManager {
                     if (board[i][k - 1].getValue() == 0) {
                         board[i][k - 1] = board[i][k];
                         board[i][k] = new Cell(0);
+                        moved = true;
                     } else if (board[i][k - 1].compareTo(board[i][k]) == 0) {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
+                        moved = true;
                     }
                     k--;
                 }
             }
         }
+        return moved;
     }
 
-    public void moveCellsLeft() {
+    public boolean moveCellsRight() {
         for (int i = 0; i < 2; i++) rotate90Degree();
-        moveCellsRight();
+        boolean moved = moveCellsLeft();
         for (int i = 0; i < 2; i++) rotate90Degree();
+
+        return moved;
     }
 
-    public void moveCellsUp() {
+    public boolean moveCellsUp() {
         for (int i = 0; i < 3; i++) rotate90Degree();
-        moveCellsRight();
+        boolean moved = moveCellsLeft();
         rotate90Degree();
+
+        return moved;
     }
 
-    public void moveCellsDown() {
+    public boolean moveCellsDown() {
         rotate90Degree();
-        moveCellsRight();
+        boolean moved = moveCellsLeft();
         for (int i = 0; i < 3; i++) rotate90Degree();
+
+        return moved;
     }
 
     public void rotate90Degree() {

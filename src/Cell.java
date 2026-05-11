@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Cell {
+public class Cell implements Comparable<Cell> {
     private int value;
     private Color color;
 
@@ -62,5 +62,8 @@ public class Cell {
         return "Value: " + value + ", color: " + color;
     }
 
-    //TODO: add compareTo method to compare cells by value
+    @Override
+    public int compareTo(Cell o) {
+        return Integer.compare(this.value, o.value);
+    }
 }

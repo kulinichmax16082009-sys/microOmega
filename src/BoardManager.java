@@ -1,5 +1,6 @@
 public class BoardManager {
     private Cell[][] board;
+    private static final int[][] DIRECTIONS = { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
 
     public BoardManager(int size) {
         board = new Cell[size][size];
@@ -23,7 +24,7 @@ public class BoardManager {
                     if (board[i][k - 1].getValue() == 0) {
                         board[i][k - 1] = board[i][k];
                         board[i][k] = new Cell(0);
-                    } else if (board[i][k - 1].getValue() == board[i][k].getValue()) {
+                    } else if (board[i][k - 1].compareTo(board[i][k]) == 0) {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
                     }
@@ -63,17 +64,11 @@ public class BoardManager {
         board = newBoard;
     }
 
-    public int[][] initDirections() {
-        return new int[][] { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
-    }
-
     public boolean isAnySameCell() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
 
-                int[][] directions = initDirections();
-
-                for (int[] d : directions) {
+                for (int[] d : DIRECTIONS) {
                     int y = i + d[0];
                     int x = j + d[1];
 
@@ -81,7 +76,7 @@ public class BoardManager {
                         continue;
                     }
 
-                    if (board[i][j].getValue() == board[y][x].getValue() && board[i][j].getValue() != 0) {
+                    if (board[i][j].compareTo(board[y][x]) == 0 && board[i][j].getValue() != 0) {
                         return true;
                     }
                 }

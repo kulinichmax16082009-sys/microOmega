@@ -1,10 +1,11 @@
+package game.windows;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class BasicWindow {
     protected JFrame frame;
     protected int windowSize;
-    protected String imagePath;
 
     public BasicWindow(String title, int windowSize, String imagePath) {
         this.windowSize = windowSize;

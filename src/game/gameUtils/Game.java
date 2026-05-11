@@ -1,3 +1,10 @@
+package game.gameUtils;
+
+import game.gameObjects.Player;
+import game.windows.GamePanel;
+import game.windows.GameWindow;
+import game.windows.IntroducingWindow;
+
 import javax.swing.*;
 
 public class Game implements StartListener {

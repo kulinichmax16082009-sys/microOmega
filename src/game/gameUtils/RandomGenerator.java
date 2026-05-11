@@ -1,7 +1,9 @@
+package game.gameUtils;
+
 import java.util.Random;
 
 public class RandomGenerator {
-    private Random rnd = new Random();
+    private final Random rnd = new Random();
 
     public boolean generateProbability(float percent) {
         float randomChance = rnd.nextFloat(101);

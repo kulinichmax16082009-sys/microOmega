@@ -1,3 +1,7 @@
+package game.windows;
+
+import game.gameUtils.BoardManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,13 +39,5 @@ public class GamePanel extends JPanel {
         }
 
         repaint();
-    }
-
-    public BoardManager getBoardManager() {
-        return boardManager;
-    }
-
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
     }
 }

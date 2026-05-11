@@ -1,3 +1,7 @@
+package game.gameUtils;
+
+import game.gameObjects.Cell;
+
 public class BoardManager {
     private Cell[][] board;
     private static final int[][] DIRECTIONS = { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };

@@ -1,3 +1,5 @@
+package game.gameObjects;
+
 public class Player {
     private int score;
     private long time;

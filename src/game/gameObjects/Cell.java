@@ -1,3 +1,5 @@
+package game.gameObjects;
+
 import java.awt.*;
 
 public class Cell implements Comparable<Cell> {

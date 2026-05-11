@@ -1,3 +1,5 @@
+package game.windows;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -45,9 +47,5 @@ public class GameWindow extends BasicWindow {
         } else {
             scoreLabel.setText("Score: " + score + " | Time: " + time + " s");
         }
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
     }
 }

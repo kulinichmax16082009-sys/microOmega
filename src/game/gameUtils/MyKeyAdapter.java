@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MyKeyAdapter extends KeyAdapter {
-    private BoardManager boardManager;
+    private final BoardManager boardManager;
 
     public MyKeyAdapter(BoardManager boardManager) {
         this.boardManager = boardManager;

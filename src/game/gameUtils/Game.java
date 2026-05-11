@@ -44,7 +44,6 @@ public class Game implements StartListener {
         Timer timer = new Timer(1000, e -> {
             player.tickTime();
             gameWindow.updateLabel(player.getScore(), player.getTime());
-            gamePanel.repaint();
         });
 
         timer.start();

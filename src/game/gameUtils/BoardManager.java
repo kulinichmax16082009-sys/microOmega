@@ -35,6 +35,7 @@ public class BoardManager {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
                         moved = true;
+                        break;
                     }
                     k--;
                 }
@@ -112,9 +113,9 @@ public class BoardManager {
     }
 
     public boolean isThere2048() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].getValue() == 2048) {
+        for (Cell[] cells : board) {
+            for (Cell cell : cells) {
+                if (cell.getValue() == 2048) {
                     return true;
                 }
             }

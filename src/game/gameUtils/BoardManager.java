@@ -1,6 +1,8 @@
 package game.gameUtils;
 
 import game.gameObjects.Cell;
+import game.gameObjects.Player;
+import game.windows.GameWindow;
 
 public class BoardManager {
     private Cell[][] board;
@@ -18,7 +20,7 @@ public class BoardManager {
         }
     }
 
-    public boolean moveCellsLeft() {
+    public boolean moveCellsLeft(Player player, GameWindow gameWindow) {
         boolean moved = false;
 
         for (int i = 0; i < board.length; i++) {
@@ -35,6 +37,11 @@ public class BoardManager {
                     } else if (board[i][k - 1].compareTo(board[i][k]) == 0 && !merged) {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
+
+                        // Update score
+                        player.addScore(board[i][k - 1].getValue());
+                        gameWindow.updateScoreLabel(player.getScore());
+
                         moved = true;
                         merged = true;
                     }
@@ -45,25 +52,25 @@ public class BoardManager {
         return moved;
     }
 
-    public boolean moveCellsRight() {
+    public boolean moveCellsRight(Player player, GameWindow gameWindow) {
         for (int i = 0; i < 2; i++) rotate90Degree();
-        boolean moved = moveCellsLeft();
+        boolean moved = moveCellsLeft(player, gameWindow);
         for (int i = 0; i < 2; i++) rotate90Degree();
 
         return moved;
     }
 
-    public boolean moveCellsUp() {
+    public boolean moveCellsUp(Player player, GameWindow gameWindow) {
         for (int i = 0; i < 3; i++) rotate90Degree();
-        boolean moved = moveCellsLeft();
+        boolean moved = moveCellsLeft(player, gameWindow);
         rotate90Degree();
 
         return moved;
     }
 
-    public boolean moveCellsDown() {
+    public boolean moveCellsDown(Player player, GameWindow gameWindow) {
         rotate90Degree();
-        boolean moved = moveCellsLeft();
+        boolean moved = moveCellsLeft(player, gameWindow);
         for (int i = 0; i < 3; i++) rotate90Degree();
 
         return moved;

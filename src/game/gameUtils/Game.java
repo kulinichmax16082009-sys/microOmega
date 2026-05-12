@@ -34,6 +34,8 @@ public class Game implements StartListener {
         boardManager.addRandomCell(new RandomGenerator());
 
         gameWindow = new GameWindow(gamePanel);
+        MyKeyAdapter keyAdapter = new MyKeyAdapter(boardManager, player, gameWindow);
+        gamePanel.addKeyAdapter(keyAdapter);
 
         startTimer();
 
@@ -43,7 +45,7 @@ public class Game implements StartListener {
     public void startTimer() {
         Timer timer = new Timer(1000, e -> {
             player.tickTime();
-            gameWindow.updateLabel(player.getScore(), player.getTime());
+            gameWindow.updateTimeLabel(player.getTime());
         });
 
         timer.start();

@@ -11,7 +11,6 @@ public class GamePanel extends JPanel {
 
     public GamePanel(BoardManager boardManager) {
         this.boardManager = boardManager;
-        initKeyListener();
         setFocusable(true);
     }
 
@@ -44,7 +43,7 @@ public class GamePanel extends JPanel {
         repaint();
     }
 
-    public void initKeyListener() {
-        addKeyListener(new MyKeyAdapter(boardManager));
+    public void addKeyAdapter(MyKeyAdapter keyAdapter) {
+        addKeyListener(keyAdapter);
     }
 }

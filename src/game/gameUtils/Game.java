@@ -1,6 +1,7 @@
 package game.gameUtils;
 
 import game.gameObjects.Player;
+import game.windows.EndWindow;
 import game.windows.GamePanel;
 import game.windows.GameWindow;
 import game.windows.IntroducingWindow;
@@ -11,6 +12,8 @@ public class Game implements StartListener {
     private IntroducingWindow introducingWindow;
     private GameWindow gameWindow;
     private GamePanel gamePanel;
+    private EndWindow endWindow;
+    private Timer timer;
 
     private BoardManager boardManager;
     private Player player;
@@ -38,16 +41,35 @@ public class Game implements StartListener {
         gamePanel.addKeyAdapter(keyAdapter);
 
         startTimer();
+    }
 
-        //You can add some code here
+    public void checkGameOver() {
+        if (boardManager.isFull() && !boardManager.isThere2048()) {
+            endWindow = new EndWindow(player);
+            stopTimer();
+            gameWindow.close();
+            endWindow.initBadEnd();
+        } else if (boardManager.isThere2048()) {
+            endWindow = new EndWindow(player);
+            stopTimer();
+            gameWindow.close();
+            endWindow.initGoodEnd();
+        }
     }
 
     public void startTimer() {
-        Timer timer = new Timer(1000, e -> {
+        timer = new Timer(1000, e -> {
             player.tickTime();
             gameWindow.updateTimeLabel(player.getTime());
+            checkGameOver();
         });
 
         timer.start();
+    }
+
+    public void stopTimer() {
+        if (timer != null) {
+            timer.stop();
+        }
     }
 }

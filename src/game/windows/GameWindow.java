@@ -13,7 +13,7 @@ public class GameWindow extends BasicWindow {
     public final static int GAP_SIZE = 12;
 
     public GameWindow(GamePanel gamePanel) {
-        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), "resources/icons/gameWindowIcon.png");
+        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1));
         gamePanel.setPreferredSize(new Dimension(windowSize, windowSize));
 
         intiScoreLabel();
@@ -64,5 +64,10 @@ public class GameWindow extends BasicWindow {
 
     public void updateScoreLabel(int score) {
         scoreLabel.setText("Score: " + score + " ");
+    }
+
+    @Override
+    public String getImagePath() {
+        return "resources/icons/gameWindowIcon.png";
     }
 }

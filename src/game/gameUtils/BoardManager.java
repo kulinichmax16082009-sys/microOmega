@@ -110,9 +110,13 @@ public class BoardManager {
     }
 
     public boolean isFull() {
+        if (isAnySameCell()) {
+            return false;
+        }
+
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (isCellEmpty(j, i) && !isAnySameCell()) {
+                if (isCellEmpty(j, i)) {
                     return false;
                 }
             }

@@ -17,7 +17,7 @@ public class IntroducingWindow extends BasicWindow {
     private final static float BUTTON_DISTANCE_FACTOR = 1.5f;
 
     public IntroducingWindow(StartListener startListener) {
-        super("2048 - Introducing Window", 400,"resources/icons/introducingWindowIcon.png");
+        super("2048 - Introducing Window", 400);
         this.startListener = startListener;
 
         initTitleLabel();
@@ -43,9 +43,7 @@ public class IntroducingWindow extends BasicWindow {
         buttons.add(load);
         buttons.add(quit);
 
-        start.addActionListener(e -> {
-            startListener.onStart();
-        });
+        start.addActionListener(e -> startListener.onStart());
 
         //TODO: implement load button
         load.addActionListener(e -> System.out.println("Load button clicked"));
@@ -76,5 +74,10 @@ public class IntroducingWindow extends BasicWindow {
         titleLabel.setOpaque(true);
         titleLabel.setBackground(new Color(195, 196, 195));
         frame.add(titleLabel, BorderLayout.NORTH);
+    }
+
+    @Override
+    public String getImagePath() {
+        return "resources/icons/introducingWindowIcon.png";
     }
 }

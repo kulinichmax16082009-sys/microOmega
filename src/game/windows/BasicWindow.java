@@ -5,10 +5,12 @@ import java.awt.*;
 
 public abstract class BasicWindow {
     protected JFrame frame;
-    protected int windowSize;
+    protected int width;
+    protected int height;
 
-    public BasicWindow(String title, int windowSize) {
-        this.windowSize = windowSize;
+    public BasicWindow(String title, int width, int height) {
+        this.width = width;
+        this.height = height;
 
         frame = new JFrame(title);
         frame.setLayout(new BorderLayout());

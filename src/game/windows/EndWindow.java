@@ -13,7 +13,7 @@ public class EndWindow extends BasicWindow {
     private JButton quit;
 
     public EndWindow(Player player) {
-        super("2048 - End Window", 350);
+        super("2048 - End Window", 350, 350);
 
         initStats(player);
         initButtons();
@@ -88,6 +88,7 @@ public class EndWindow extends BasicWindow {
     public void initButtons() {
 
         playAgain = new JButton("Play Again");
+
         quit = new JButton("Quit");
 
         styleButton(playAgain, new Color(143, 122, 102));
@@ -128,6 +129,6 @@ public class EndWindow extends BasicWindow {
 
     @Override
     public String getImagePath() {
-        return "resources/icons/endingWindowIcon.jpg";
+        return "resources/windowIcons/endingWindowIcon.jpg";
     }
 }

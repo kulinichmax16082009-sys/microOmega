@@ -10,19 +10,24 @@ public class IntroducingWindow extends BasicWindow {
 
     //TODO: json file for settings
     private ArrayList<JButton> buttons;
-    private StartListener startListener;
+    private final StartListener startListener;
+    private JPanel introducingPanel;
 
-    private final static int BUTTON_WIDTH = 200;
-    private final static int BUTTON_HEIGHT = 50;
+    private final static int BUTTON_WIDTH = 300;
+    private final static int BUTTON_HEIGHT = 70;
     private final static float BUTTON_DISTANCE_FACTOR = 1.5f;
 
+    private final static int Y_OFFSET = 110;
+
     public IntroducingWindow(StartListener startListener) {
-        super("2048 - Introducing Window", 400);
+        super("2048 - Introducing Window", 450, 600);
         this.startListener = startListener;
+        initIntroducingPanel();
 
         initTitleLabel();
         initButtons();
         setButtonsLocation();
+        setBackgroundImage();
 
         //Final settings
         frame.pack();
@@ -32,12 +37,14 @@ public class IntroducingWindow extends BasicWindow {
     public void initButtons() {
         buttons = new ArrayList<>();
 
-        JPanel buttonPanel = new JPanel(null);
-        buttonPanel.setPreferredSize(new Dimension(windowSize, windowSize));
+        JButton start = new JButton();
+        start.setIcon(new ImageIcon("resources/buttonIcons/startButtonIcon.png"));
 
-        JButton start = new JButton("START");
-        JButton load = new JButton("LOAD");
-        JButton quit = new JButton("QUIT");
+        JButton load = new JButton();
+        load.setIcon(new ImageIcon("resources/buttonIcons/loadButtonIcon.png"));
+
+        JButton quit = new JButton();
+        quit.setIcon(new ImageIcon("resources/buttonIcons/quitButtonIcon.png"));
 
         buttons.add(start);
         buttons.add(load);
@@ -55,29 +62,52 @@ public class IntroducingWindow extends BasicWindow {
         }
 
         for (JButton button : buttons) {
-            buttonPanel.add(button);
+            introducingPanel.add(button);
         }
-
-        frame.add(buttonPanel, BorderLayout.CENTER);
     }
 
     public void setButtonsLocation() {
         for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setLocation((windowSize - BUTTON_WIDTH) / 2,
-                    (windowSize - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (BUTTON_DISTANCE_FACTOR * BUTTON_HEIGHT));
+            buttons.get(i).setLocation((width - BUTTON_WIDTH) / 2,
+                    (height - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (BUTTON_DISTANCE_FACTOR * BUTTON_HEIGHT) + Y_OFFSET);
         }
     }
 
     public void initTitleLabel() {
-        JLabel titleLabel = new JLabel("2048", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 70));
-        titleLabel.setOpaque(true);
-        titleLabel.setBackground(new Color(195, 196, 195));
-        frame.add(titleLabel, BorderLayout.NORTH);
+        ImageIcon icon =
+                new ImageIcon("resources/labelIcons/2048Label.png");
+
+        JLabel titleLabel = new JLabel(icon, JLabel.CENTER);
+
+        titleLabel.setBounds((width - icon.getIconWidth()) / 2, 10, icon.getIconWidth(), icon.getIconHeight());
+
+        introducingPanel.add(titleLabel);
+    }
+
+    public void setBackgroundImage() {
+        ImageIcon background =
+                new ImageIcon("resources/backgrounds/introducingWindowBackground.png");
+
+        JLabel backgroundLabel = new JLabel(background);
+
+        backgroundLabel.setBounds(0, 0, width, height);
+
+        introducingPanel.add(backgroundLabel);
+
+        introducingPanel.setComponentZOrder(backgroundLabel, introducingPanel.getComponentCount() - 1);
+    }
+
+    public void initIntroducingPanel() {
+        introducingPanel = new JPanel(null);
+
+        introducingPanel.setOpaque(false);
+        introducingPanel.setPreferredSize(new Dimension(width, height));
+
+        frame.add(introducingPanel, BorderLayout.CENTER);
     }
 
     @Override
     public String getImagePath() {
-        return "resources/icons/introducingWindowIcon.png";
+        return "resources/windowIcons/introducingWindowIcon.png";
     }
 }

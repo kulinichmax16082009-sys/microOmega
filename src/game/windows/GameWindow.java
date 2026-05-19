@@ -13,11 +13,12 @@ public class GameWindow extends BasicWindow {
     public final static int GAP_SIZE = 12;
 
     public GameWindow(GamePanel gamePanel) {
-        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1));
-        gamePanel.setPreferredSize(new Dimension(windowSize, windowSize));
+        super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1));
+        gamePanel.setPreferredSize(new Dimension(width, height));
 
         intiScoreLabel();
         initTimeLabel();
+        initSaveButton();
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         labelPanel.setBackground(new Color(195, 196, 195));
@@ -66,8 +67,19 @@ public class GameWindow extends BasicWindow {
         scoreLabel.setText("Score: " + score + " ");
     }
 
+    public void initSaveButton() {
+        JButton saveButton = new JButton("Save");
+        JPanel buttonPanel = new JPanel();
+
+        saveButton.setBackground(new Color(150, 150, 150));
+        buttonPanel.add(saveButton);
+        buttonPanel.setBackground(new Color(195, 196, 195));
+
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+    }
+
     @Override
     public String getImagePath() {
-        return "resources/icons/gameWindowIcon.png";
+        return "resources/windowIcons/gameWindowIcon.png";
     }
 }

@@ -18,18 +18,23 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
+        boolean moved = false;
+
         if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-            if (boardManager.moveCellsLeft(player, gameWindow)) boardManager.addRandomCell(new RandomGenerator());
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
-            if (boardManager.moveCellsRight(player, gameWindow)) boardManager.addRandomCell(new RandomGenerator());
-        } else if (e.getKeyCode() == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-            if (boardManager.moveCellsUp(player, gameWindow)) boardManager.addRandomCell(new RandomGenerator());
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
-            if (boardManager.moveCellsDown(player, gameWindow)) boardManager.addRandomCell(new RandomGenerator());
+            moved = boardManager.moveCellsLeft(player, gameWindow);
+        } else if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
+            moved = boardManager.moveCellsRight(player, gameWindow);
+        } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
+            moved = boardManager.moveCellsUp(player, gameWindow);
+        } else if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
+            moved = boardManager.moveCellsDown(player, gameWindow);
+        }
+
+        if (moved) {
+            boardManager.addRandomCell(new RandomGenerator());
         }
     }
 }

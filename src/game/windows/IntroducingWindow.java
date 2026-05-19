@@ -1,6 +1,5 @@
 package game.windows;
 
-import game.gameUtils.GameData;
 import game.gameUtils.StartListener;
 
 import javax.swing.*;
@@ -110,5 +109,9 @@ public class IntroducingWindow extends BasicWindow {
     @Override
     public String getImagePath() {
         return "resources/windowIcons/introducingWindowIcon.png";
+    }
+
+    public void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

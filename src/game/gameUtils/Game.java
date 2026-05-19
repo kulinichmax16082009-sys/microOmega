@@ -33,9 +33,15 @@ public class Game implements StartListener {
     @Override
     public void onStart(boolean isLoading) {
         if (isLoading) {
-            this.gameData = GameData.loadGame("resources/lastSave/save.dat");
-            this.player = gameData.getPlayer();
-            this.boardManager = gameData.getBoardManager();
+            gameData = GameData.loadGame("resources/lastSave/save.dat");
+            if (gameData == null) {
+                introducingWindow.showErrorMessage("No saved game found");
+                gameData = new GameData(player, boardManager);
+                return;
+            } else {
+                this.player = gameData.getPlayer();
+                this.boardManager = gameData.getBoardManager();
+            }
         } else {
             boardManager.addRandomCell(new RandomGenerator());
             boardManager.addRandomCell(new RandomGenerator());

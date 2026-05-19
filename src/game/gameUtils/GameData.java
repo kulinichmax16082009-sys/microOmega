@@ -62,8 +62,7 @@ public class GameData implements Serializable {
 
             return gameData;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return null;
         }
-
     }
 }

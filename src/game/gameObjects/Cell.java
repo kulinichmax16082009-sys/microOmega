@@ -1,8 +1,9 @@
 package game.gameObjects;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Cell implements Comparable<Cell> {
+public class Cell implements Comparable<Cell>, Serializable {
     private int value;
     private Color color;
 

@@ -4,7 +4,9 @@ import game.gameObjects.Cell;
 import game.gameObjects.Player;
 import game.windows.GameWindow;
 
-public class BoardManager {
+import java.io.Serializable;
+
+public class BoardManager implements Serializable {
     private Cell[][] board;
     private static final int[][] DIRECTIONS = { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
 

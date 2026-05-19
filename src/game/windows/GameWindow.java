@@ -1,5 +1,7 @@
 package game.windows;
 
+import game.gameUtils.GameData;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,13 +14,13 @@ public class GameWindow extends BasicWindow {
     public final static int CELLS_COUNT = 4;
     public final static int GAP_SIZE = 12;
 
-    public GameWindow(GamePanel gamePanel) {
+    public GameWindow(GamePanel gamePanel, GameData gameData) {
         super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1));
         gamePanel.setPreferredSize(new Dimension(width, height));
 
         intiScoreLabel();
         initTimeLabel();
-        initSaveButton();
+        initSaveButton(gameData, gamePanel);
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         labelPanel.setBackground(new Color(195, 196, 195));
@@ -67,9 +69,15 @@ public class GameWindow extends BasicWindow {
         scoreLabel.setText("Score: " + score + " ");
     }
 
-    public void initSaveButton() {
+    public void initSaveButton(GameData gameData, GamePanel gamePanel) {
         JButton saveButton = new JButton("Save");
         JPanel buttonPanel = new JPanel();
+
+        saveButton.addActionListener(e -> {
+            gameData.saveGame("resources/lastSave/save.dat");
+
+            gamePanel.requestFocusInWindow();
+        });
 
         saveButton.setBackground(new Color(150, 150, 150));
         buttonPanel.add(saveButton);

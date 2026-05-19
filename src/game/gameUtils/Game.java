@@ -14,6 +14,7 @@ public class Game implements StartListener {
     private GamePanel gamePanel;
     private EndWindow endWindow;
     private Timer timer;
+    private GameData gameData;
 
     private BoardManager boardManager;
     private Player player;
@@ -22,7 +23,7 @@ public class Game implements StartListener {
         this.player = new Player();
         this.boardManager = new BoardManager(GameWindow.CELLS_COUNT);
         this.boardManager.initBoard();
-        this.gamePanel = new GamePanel(boardManager);
+        this.gameData = new GameData(player, boardManager);
     }
 
     public void play() {
@@ -30,13 +31,24 @@ public class Game implements StartListener {
     }
 
     @Override
-    public void onStart() {
+    public void onStart(boolean isLoading) {
+        if (isLoading) {
+            this.gameData = GameData.loadGame("resources/lastSave/save.dat");
+            this.player = gameData.getPlayer();
+            this.boardManager = gameData.getBoardManager();
+        } else {
+            boardManager.addRandomCell(new RandomGenerator());
+            boardManager.addRandomCell(new RandomGenerator());
+        }
+
         introducingWindow.close();
 
-        boardManager.addRandomCell(new RandomGenerator());
-        boardManager.addRandomCell(new RandomGenerator());
+        this.gamePanel = new GamePanel(boardManager);
+        this.gameWindow = new GameWindow(gamePanel, gameData);
 
-        gameWindow = new GameWindow(gamePanel);
+        gameWindow.updateScoreLabel(player.getScore());
+        gameWindow.updateTimeLabel(player.getTime());
+
         MyKeyAdapter keyAdapter = new MyKeyAdapter(boardManager, player, gameWindow);
         gamePanel.addKeyAdapter(keyAdapter);
 
@@ -61,6 +73,7 @@ public class Game implements StartListener {
         timer = new Timer(1000, e -> {
             player.tickTime();
             gameWindow.updateTimeLabel(player.getTime());
+            gameData.update(player, boardManager);
             checkGameOver();
         });
 

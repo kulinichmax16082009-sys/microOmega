@@ -1,5 +1,6 @@
 package game.windows;
 
+import game.gameUtils.GameData;
 import game.gameUtils.StartListener;
 
 import javax.swing.*;
@@ -50,10 +51,10 @@ public class IntroducingWindow extends BasicWindow {
         buttons.add(load);
         buttons.add(quit);
 
-        start.addActionListener(e -> startListener.onStart());
+        start.addActionListener(e -> startListener.onStart(false));
 
         //TODO: implement load button
-        load.addActionListener(e -> System.out.println("Load button clicked"));
+        load.addActionListener(e -> startListener.onStart(true));
 
         quit.addActionListener(e -> System.exit(0));
 

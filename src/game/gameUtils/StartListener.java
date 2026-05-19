@@ -1,5 +1,5 @@
 package game.gameUtils;
 
 public interface StartListener {
-    void onStart();
+    void onStart(boolean isLoading);
 }

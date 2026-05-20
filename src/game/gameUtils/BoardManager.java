@@ -12,6 +12,7 @@ public class BoardManager implements Serializable {
 
     public BoardManager(int size) {
         board = new Cell[size][size];
+        initBoard();
     }
 
     public void initBoard() {
@@ -112,15 +113,12 @@ public class BoardManager implements Serializable {
     }
 
     public boolean isFull() {
-        if (isAnySameCell()) {
-            return false;
-        }
+        if (isAnySameCell()) return false;
+
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (isCellEmpty(j, i)) {
-                    return false;
-                }
+                if (isCellEmpty(j, i)) return false;
             }
         }
         return true;
@@ -129,9 +127,7 @@ public class BoardManager implements Serializable {
     public boolean isThere2048() {
         for (Cell[] cells : board) {
             for (Cell cell : cells) {
-                if (cell.getValue() == 2048) {
-                    return true;
-                }
+                if (cell.getValue() == 2048) return true;
             }
         }
         return false;

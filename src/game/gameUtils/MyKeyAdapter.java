@@ -10,11 +10,20 @@ public class MyKeyAdapter extends KeyAdapter {
     private final BoardManager boardManager;
     private final Player player;
     private final GameWindow gameWindow;
+    private final GameData gameData;
 
-    public MyKeyAdapter(BoardManager boardManager, Player player, GameWindow gameWindow) {
+    public MyKeyAdapter(BoardManager boardManager, Player player, GameWindow gameWindow, GameData gameData) {
         this.boardManager = boardManager;
         this.player = player;
         this.gameWindow = gameWindow;
+        this.gameData = gameData;
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
+            gameData.saveGame("resources/lastSave/save.dat");
+        }
     }
 
     @Override
@@ -29,7 +38,7 @@ public class MyKeyAdapter extends KeyAdapter {
             moved = boardManager.moveCellsRight(player, gameWindow);
         } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
             moved = boardManager.moveCellsUp(player, gameWindow);
-        } else if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
+        } else if ((keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) && !e.isControlDown()) {
             moved = boardManager.moveCellsDown(player, gameWindow);
         }
 

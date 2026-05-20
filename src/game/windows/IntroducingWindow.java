@@ -52,7 +52,6 @@ public class IntroducingWindow extends BasicWindow {
 
         start.addActionListener(e -> startListener.onStart(false));
 
-        //TODO: implement load button
         load.addActionListener(e -> startListener.onStart(true));
 
         quit.addActionListener(e -> System.exit(0));
@@ -74,8 +73,7 @@ public class IntroducingWindow extends BasicWindow {
     }
 
     public void initTitleLabel() {
-        ImageIcon icon =
-                new ImageIcon("resources/labelIcons/2048Label.png");
+        ImageIcon icon = new ImageIcon("resources/labelIcons/2048Label.png");
 
         JLabel titleLabel = new JLabel(icon, JLabel.CENTER);
 
@@ -85,8 +83,7 @@ public class IntroducingWindow extends BasicWindow {
     }
 
     public void setBackgroundImage() {
-        ImageIcon background =
-                new ImageIcon("resources/backgrounds/introducingWindowBackground.png");
+        ImageIcon background = new ImageIcon("resources/backgrounds/introducingWindowBackground.png");
 
         JLabel backgroundLabel = new JLabel(background);
 
@@ -101,6 +98,7 @@ public class IntroducingWindow extends BasicWindow {
         introducingPanel = new JPanel(null);
 
         introducingPanel.setOpaque(false);
+
         introducingPanel.setPreferredSize(new Dimension(width, height));
 
         frame.add(introducingPanel, BorderLayout.CENTER);

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    private BoardManager boardManager;
+    private final BoardManager boardManager;
 
     public GamePanel(BoardManager boardManager) {
         this.boardManager = boardManager;

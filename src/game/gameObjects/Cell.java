@@ -48,16 +48,8 @@ public class Cell implements Comparable<Cell>, Serializable {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public Color getColor() {
         return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
     @Override

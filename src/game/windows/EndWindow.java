@@ -15,15 +15,16 @@ public class EndWindow extends BasicWindow {
     public EndWindow(Player player) {
         super("2048 - End Window", 350, 350);
 
+        initQuitButton();
+        initPlayAgainButton();
         initStats(player);
-        initButtons();
+        addButtonsToWindow();
 
         frame.pack();
         frame.setLocationRelativeTo(null);
     }
 
     private void initStats(Player player) {
-
         JPanel statsPanel = new JPanel(new GridLayout(2, 1, 0, 10));
 
         statsPanel.setBackground(new Color(250, 248, 239));
@@ -46,7 +47,6 @@ public class EndWindow extends BasicWindow {
     }
 
     public void initBadEnd() {
-
         JPanel topPanel = new JPanel();
 
         topPanel.setBackground(new Color(119, 110, 101));
@@ -66,7 +66,6 @@ public class EndWindow extends BasicWindow {
     }
 
     public void initGoodEnd() {
-
         JPanel topPanel = new JPanel();
 
         topPanel.setBackground(new Color(237, 194, 46));
@@ -85,24 +84,24 @@ public class EndWindow extends BasicWindow {
         frame.setLocationRelativeTo(null);
     }
 
-    public void initButtons() {
-
-        playAgain = new JButton("Play Again");
-
+    public void initQuitButton() {
         quit = new JButton("Quit");
-
-        styleButton(playAgain, new Color(143, 122, 102));
         styleButton(quit, new Color(119, 110, 101));
+        quit.addActionListener(e -> System.exit(0));
+        quit.setBackground(new Color(119, 110, 101));
+    }
 
+    public void initPlayAgainButton() {
+        playAgain = new JButton("Play Again");
+        styleButton(playAgain, new Color(143, 122, 102));
         playAgain.addActionListener(e -> {
             close();
-
             Game newGame = new Game();
             newGame.play();
         });
+    }
 
-        quit.addActionListener(e -> System.exit(0));
-
+    public void addButtonsToWindow() {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 15, 0));
 
         buttonPanel.setBackground(new Color(250, 248, 239));
@@ -115,12 +114,8 @@ public class EndWindow extends BasicWindow {
     }
 
     private void styleButton(JButton button, Color color) {
-
         button.setBackground(color);
         button.setForeground(Color.WHITE);
-
-        button.setFocusPainted(false);
-        button.setBorderPainted(false);
 
         button.setFont(new Font("Arial", Font.BOLD, 18));
 

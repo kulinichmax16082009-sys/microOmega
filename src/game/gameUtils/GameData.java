@@ -50,7 +50,7 @@ public class GameData implements Serializable {
 
     }
 
-    public static GameData loadGame(String filePath) {
+    public static GameData loadData(String filePath) {
         try {
             FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);

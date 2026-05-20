@@ -23,16 +23,8 @@ public class Player implements Serializable {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public long getTime() {
         return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
     }
 
     @Override

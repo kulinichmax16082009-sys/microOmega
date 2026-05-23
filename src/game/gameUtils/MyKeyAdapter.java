@@ -22,7 +22,7 @@ public class MyKeyAdapter extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
-            gameData.saveGame("resources/lastSave/save.dat");
+            gameData.saveGame(Game.SAVE_LOAD_PATH);
         }
     }
 
@@ -33,17 +33,19 @@ public class MyKeyAdapter extends KeyAdapter {
         boolean moved = false;
 
         if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-            moved = boardManager.moveCellsLeft(player, gameWindow);
+            moved = boardManager.moveCellsLeft(player);
         } else if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
-            moved = boardManager.moveCellsRight(player, gameWindow);
+            moved = boardManager.moveCellsRight(player);
         } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-            moved = boardManager.moveCellsUp(player, gameWindow);
+            moved = boardManager.moveCellsUp(player);
         } else if ((keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) && !e.isControlDown()) {
-            moved = boardManager.moveCellsDown(player, gameWindow);
+            moved = boardManager.moveCellsDown(player);
         }
 
         if (moved) {
             boardManager.addRandomCell(new RandomGenerator());
+            gameWindow.updateScoreLabel(player.getScore());
+            gameWindow.getGamePanel().repaint();
         }
     }
 }

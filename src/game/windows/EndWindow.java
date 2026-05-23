@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class EndWindow extends BasicWindow {
-
     private JButton playAgain;
     private JButton quit;
 
@@ -84,14 +83,14 @@ public class EndWindow extends BasicWindow {
         frame.setLocationRelativeTo(null);
     }
 
-    public void initQuitButton() {
+    private void initQuitButton() {
         quit = new JButton("Quit");
         styleButton(quit, new Color(119, 110, 101));
         quit.addActionListener(e -> System.exit(0));
         quit.setBackground(new Color(119, 110, 101));
     }
 
-    public void initPlayAgainButton() {
+    private void initPlayAgainButton() {
         playAgain = new JButton("Play Again");
         styleButton(playAgain, new Color(143, 122, 102));
         playAgain.addActionListener(e -> {
@@ -101,7 +100,7 @@ public class EndWindow extends BasicWindow {
         });
     }
 
-    public void addButtonsToWindow() {
+    private void addButtonsToWindow() {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 15, 0));
 
         buttonPanel.setBackground(new Color(250, 248, 239));

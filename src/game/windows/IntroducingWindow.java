@@ -7,8 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class IntroducingWindow extends BasicWindow {
-
-    //TODO: json file for settings
     private ArrayList<JButton> buttons;
     private final StartListener startListener;
     private JPanel introducingPanel;
@@ -18,6 +16,13 @@ public class IntroducingWindow extends BasicWindow {
     private final static float BUTTON_DISTANCE_FACTOR = 1.5f;
 
     private final static int Y_OFFSET = 110;
+
+    private final static String START_BUTTON_PATH = "resources/buttonIcons/startButtonIcon.png";
+    private final static String LOAD_BUTTON_PATH = "resources/buttonIcons/loadButtonIcon.png";
+    private final static String QUIT_BUTTON_PATH = "resources/buttonIcons/quitButtonIcon.png";
+
+    private final static String TITLE_LABEL_PATH = "resources/labelIcons/2048Label.png";
+    private final static String BACKGROUND_IMAGE_PATH = "resources/backgrounds/introducingWindowBackground.png";
 
     public IntroducingWindow(StartListener startListener) {
         super("2048 - Introducing Window", 450, 600);
@@ -34,17 +39,17 @@ public class IntroducingWindow extends BasicWindow {
         frame.setLocationRelativeTo(null);
     }
 
-    public void initButtons() {
+    private void initButtons() {
         buttons = new ArrayList<>();
 
         JButton start = new JButton();
-        start.setIcon(new ImageIcon("resources/buttonIcons/startButtonIcon.png"));
+        start.setIcon(new ImageIcon(START_BUTTON_PATH));
 
         JButton load = new JButton();
-        load.setIcon(new ImageIcon("resources/buttonIcons/loadButtonIcon.png"));
+        load.setIcon(new ImageIcon(LOAD_BUTTON_PATH));
 
         JButton quit = new JButton();
-        quit.setIcon(new ImageIcon("resources/buttonIcons/quitButtonIcon.png"));
+        quit.setIcon(new ImageIcon(QUIT_BUTTON_PATH));
 
         buttons.add(start);
         buttons.add(load);
@@ -65,15 +70,15 @@ public class IntroducingWindow extends BasicWindow {
         }
     }
 
-    public void setButtonsLocation() {
+    private void setButtonsLocation() {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setLocation((width - BUTTON_WIDTH) / 2,
                     (height - buttons.size() * BUTTON_HEIGHT) / buttons.size() + i * (int) (BUTTON_DISTANCE_FACTOR * BUTTON_HEIGHT) + Y_OFFSET);
         }
     }
 
-    public void initTitleLabel() {
-        ImageIcon icon = new ImageIcon("resources/labelIcons/2048Label.png");
+    private void initTitleLabel() {
+        ImageIcon icon = new ImageIcon(TITLE_LABEL_PATH);
 
         JLabel titleLabel = new JLabel(icon, JLabel.CENTER);
 
@@ -82,8 +87,8 @@ public class IntroducingWindow extends BasicWindow {
         introducingPanel.add(titleLabel);
     }
 
-    public void setBackgroundImage() {
-        ImageIcon background = new ImageIcon("resources/backgrounds/introducingWindowBackground.png");
+    private void setBackgroundImage() {
+        ImageIcon background = new ImageIcon(BACKGROUND_IMAGE_PATH);
 
         JLabel backgroundLabel = new JLabel(background);
 
@@ -94,7 +99,7 @@ public class IntroducingWindow extends BasicWindow {
         introducingPanel.setComponentZOrder(backgroundLabel, introducingPanel.getComponentCount() - 1);
     }
 
-    public void initIntroducingPanel() {
+    private void initIntroducingPanel() {
         introducingPanel = new JPanel(null);
 
         introducingPanel.setOpaque(false);

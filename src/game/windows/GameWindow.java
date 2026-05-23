@@ -1,16 +1,18 @@
 package game.windows;
 
+import game.gameUtils.Game;
 import game.gameUtils.GameData;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameWindow extends BasicWindow {
-
     private JLabel scoreLabel;
     private JLabel timeLabel;
     private JButton saveButton;
     private JButton quitButton;
+
+    private final GamePanel gamePanel;
 
     public final static int CELL_SIZE = 100;
     public final static int CELLS_COUNT = 4;
@@ -18,30 +20,31 @@ public class GameWindow extends BasicWindow {
 
     public GameWindow(GamePanel gamePanel, GameData gameData) {
         super("2048 - Game", CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1), CELL_SIZE * CELLS_COUNT + GAP_SIZE * (CELLS_COUNT + 1));
-        gamePanel.setPreferredSize(new Dimension(width, height));
+        this.gamePanel = gamePanel;
+        this.gamePanel.setPreferredSize(new Dimension(width, height));
 
         //Initialize components
         intiScoreLabel();
         initTimeLabel();
 
         //Initialize buttons
-        initSaveButton(gameData, gamePanel);
+        initSaveButton(gameData);
         initQuitButton();
 
         //Add components to window
         addButtonsToWindow();
         addLabelsToWindow();
 
-        frame.add(gamePanel);
+        frame.add(this.gamePanel);
 
-        gamePanel.requestFocusInWindow();
+        this.gamePanel.requestFocusInWindow();
 
         //Final settings
         frame.pack();
         frame.setLocationRelativeTo(null);
     }
 
-    public void addLabelsToWindow() {
+    private void addLabelsToWindow() {
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         labelPanel.setBackground(new Color(195, 196, 195));
         labelPanel.add(scoreLabel);
@@ -50,7 +53,7 @@ public class GameWindow extends BasicWindow {
         frame.add(labelPanel, BorderLayout.NORTH);
     }
 
-    public void addButtonsToWindow() {
+    private void addButtonsToWindow() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(195, 196, 195));
         buttonPanel.add(saveButton);
@@ -59,30 +62,30 @@ public class GameWindow extends BasicWindow {
         frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void intiScoreLabel() {
+    private void intiScoreLabel() {
         scoreLabel = new JLabel("Score: 0 ", JLabel.CENTER);
         scoreLabel.setOpaque(true);
         scoreLabel.setBackground(new Color(195, 196, 195));
     }
 
-    public void initTimeLabel() {
+    private void initTimeLabel() {
         timeLabel = new JLabel("| Time: 0 s", JLabel.CENTER);
         timeLabel.setOpaque(true);
         timeLabel.setBackground(new Color(195, 196, 195));
     }
 
-    public void initSaveButton(GameData gameData, GamePanel gamePanel) {
+    private void initSaveButton(GameData gameData) {
         saveButton = new JButton("Save");
 
         saveButton.addActionListener(e -> {
-            gameData.saveGame("resources/lastSave/save.dat");
+            gameData.saveGame(Game.SAVE_LOAD_PATH);
             gamePanel.requestFocusInWindow();
         });
 
         saveButton.setBackground(new Color(150, 150, 150));
     }
 
-    public void initQuitButton() {
+    private void initQuitButton() {
         quitButton = new JButton("Quit");
 
         quitButton.addActionListener(e -> System.exit(0));
@@ -108,6 +111,10 @@ public class GameWindow extends BasicWindow {
 
     public void updateScoreLabel(int score) {
         scoreLabel.setText("Score: " + score + " ");
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 
     @Override

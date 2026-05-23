@@ -2,7 +2,6 @@ package game.gameUtils;
 
 import game.gameObjects.Cell;
 import game.gameObjects.Player;
-import game.windows.GameWindow;
 
 import java.io.Serializable;
 
@@ -23,7 +22,7 @@ public class BoardManager implements Serializable {
         }
     }
 
-    public boolean moveCellsLeft(Player player, GameWindow gameWindow) {
+    public boolean moveCellsLeft(Player player) {
         boolean moved = false;
 
         for (int i = 0; i < board.length; i++) {
@@ -43,7 +42,6 @@ public class BoardManager implements Serializable {
 
                         // Update score
                         player.addScore(board[i][k - 1].getValue());
-                        gameWindow.updateScoreLabel(player.getScore());
 
                         moved = true;
                         merged = true;
@@ -55,25 +53,25 @@ public class BoardManager implements Serializable {
         return moved;
     }
 
-    public boolean moveCellsRight(Player player, GameWindow gameWindow) {
+    public boolean moveCellsRight(Player player) {
         for (int i = 0; i < 2; i++) rotate90Degree();
-        boolean moved = moveCellsLeft(player, gameWindow);
+        boolean moved = moveCellsLeft(player);
         for (int i = 0; i < 2; i++) rotate90Degree();
 
         return moved;
     }
 
-    public boolean moveCellsUp(Player player, GameWindow gameWindow) {
+    public boolean moveCellsUp(Player player) {
         for (int i = 0; i < 3; i++) rotate90Degree();
-        boolean moved = moveCellsLeft(player, gameWindow);
+        boolean moved = moveCellsLeft(player);
         rotate90Degree();
 
         return moved;
     }
 
-    public boolean moveCellsDown(Player player, GameWindow gameWindow) {
+    public boolean moveCellsDown(Player player) {
         rotate90Degree();
-        boolean moved = moveCellsLeft(player, gameWindow);
+        boolean moved = moveCellsLeft(player);
         for (int i = 0; i < 3; i++) rotate90Degree();
 
         return moved;

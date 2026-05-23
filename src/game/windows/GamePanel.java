@@ -45,8 +45,6 @@ public class GamePanel extends JPanel {
                 }
             }
         }
-
-        repaint();
     }
 
     public void addKeyAdapter(MyKeyAdapter keyAdapter) {

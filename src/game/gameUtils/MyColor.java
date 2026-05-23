@@ -1,6 +1,8 @@
 package game.gameUtils;
 
-public class MyColor {
+import java.io.Serializable;
+
+public class MyColor implements Serializable {
     private int red;
     private int green;
     private int blue;

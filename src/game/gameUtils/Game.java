@@ -23,7 +23,7 @@ public class Game implements StartListener {
     private BoardManager boardManager;
     private Player player;
 
-    public static final String SAVE_LOAD_PATH = "resources/lastSave/save.dat";
+    public static final String SAVE_LOAD_PATH = "resources/save.dat";
 
     public Game() {
         this.player = new Player();

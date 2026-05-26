@@ -18,6 +18,9 @@ public class MyColor implements Serializable {
         this.blue = 0;
     }
 
+    /**
+     * This method filters the color values to be in the range of 0-255.
+     */
     public void colorFilter() {
         if (red < 0) red = 0;
         if (red > 255) red = 255;

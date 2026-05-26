@@ -1,6 +1,7 @@
 package game.gameObjects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import game.exceptions.BadColorFormatException;
 import game.gameUtils.MyColor;
 
 import java.awt.*;
@@ -9,6 +10,11 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * This class represents cell in game with value and color that will be used in board in game.
+ *
+ * @author Maksym Kulynych
+ */
 public class Cell implements Comparable<Cell>, Serializable {
     private int value;
     private ArrayList<MyColor> possibleColors;
@@ -22,6 +28,9 @@ public class Cell implements Comparable<Cell>, Serializable {
         attachColorToValue();
     }
 
+    /**
+     * This constructor is used for creating empty cell with value 0 (is needed for .json file reading).
+     */
     public Cell() {
         value = 0;
         possibleColors = new ArrayList<>();
@@ -29,6 +38,9 @@ public class Cell implements Comparable<Cell>, Serializable {
         attachColorToValue();
     }
 
+    /**
+     * This method initializes all possible colors for cells in game by reading them from .json file.
+     */
     private void initPossibleColors() {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -37,10 +49,17 @@ public class Cell implements Comparable<Cell>, Serializable {
         try (InputStream input = new FileInputStream(JSON_FILE_PATH)) {
             mapper.readerForUpdating(this).readValue(input);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new BadColorFormatException();
+        }
+
+        for (int i = 0; i < possibleColors.size(); i++) {
+            possibleColors.get(i).colorFilter();
         }
     }
 
+    /**
+     * This method attaches color to cell value by searching for it in possible colors list.
+     */
     private void attachColorToValue() {
         int colorValue;
 

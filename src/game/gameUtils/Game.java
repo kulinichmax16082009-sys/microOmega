@@ -8,6 +8,11 @@ import game.windows.IntroducingWindow;
 
 import javax.swing.*;
 
+/**
+ * This class represents the main game logic. It manages the game windows, player, board manager, and timer.
+ *
+ * @author Maksym Kulynych
+ */
 public class Game implements StartListener {
     private IntroducingWindow introducingWindow;
     private GameWindow gameWindow;
@@ -26,9 +31,13 @@ public class Game implements StartListener {
         this.gameData = new GameData(player, boardManager);
     }
 
+    /**
+     * This method starts the game by showing the introducing window.
+     */
     public void play() {
         introducingWindow = new IntroducingWindow(this);
     }
+
 
     @Override
     public void onStart(boolean isLoading) {
@@ -47,6 +56,9 @@ public class Game implements StartListener {
         startTimer();
     }
 
+    /**
+     * This method checks if the game is over and shows the end window with the message based on the result.
+     */
     private void gameOver() {
         boolean badEnd = boardManager.isFull() && !boardManager.isThere2048();
         boolean goodEnd = boardManager.isThere2048();
@@ -61,6 +73,10 @@ public class Game implements StartListener {
         else if (goodEnd) endWindow.initGoodEnd();
     }
 
+    /**
+     * This method starts the game timer which updates the player's time and the time label in the game window every second.
+     * It also checks for game over conditions after each tick.
+     */
     private void startTimer() {
         timer = new Timer(1000, e -> {
             player.tickTime();
@@ -72,10 +88,16 @@ public class Game implements StartListener {
         timer.start();
     }
 
+    /**
+     * This method stops the game timer.
+     */
     private void stopTimer() {
         if (timer != null) timer.stop();
     }
 
+    /**
+     * This method initializes the game UI by creating a game panel and a game window, and setting up the key adapter.
+     */
     private void initGameUI() {
         GamePanel gamePanel = new GamePanel(boardManager);
         this.gameWindow = new GameWindow(gamePanel, gameData);
@@ -87,16 +109,26 @@ public class Game implements StartListener {
         gamePanel.addKeyAdapter(keyAdapter);
     }
 
+    /**
+     * This method checks if loading the game data was successful by trying to load the data and checking if it is not null.
+     * @return true if loading was successful, false otherwise
+     */
     private boolean isLoadingSuccessful() {
         GameData loadedData = GameData.loadData(SAVE_LOAD_PATH);
         return loadedData != null;
     }
 
+    /**
+     * This method adds two random cells on random positions to the board at the start of the game.
+     */
     private void addStartingCells() {
         boardManager.addRandomCell(new RandomGenerator());
         boardManager.addRandomCell(new RandomGenerator());
     }
 
+    /**
+     * This method loads the game data from the save file and updates the player and board manager based on loaded data.
+     */
     private void loadGame() {
         this.gameData = GameData.loadData(SAVE_LOAD_PATH);
         this.player = gameData.getPlayer();

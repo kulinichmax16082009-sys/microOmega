@@ -2,9 +2,13 @@ package game.gameUtils;
 
 import game.gameObjects.Cell;
 import game.gameObjects.Player;
-
 import java.io.Serializable;
 
+/**
+ * This class manages the game board, including cell movements, merging, and checking game state.
+ *
+ * @author Maksym Kulynych
+ */
 public class BoardManager implements Serializable {
     private Cell[][] board;
     private static final int[][] DIRECTIONS = { {-1, 0}, {0, -1}, {0, 1}, {1, 0} };
@@ -14,6 +18,9 @@ public class BoardManager implements Serializable {
         initBoard();
     }
 
+    /**
+     * This method initializes the game board by filling it with empty cells (value 0).
+     */
     public void initBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -22,6 +29,12 @@ public class BoardManager implements Serializable {
         }
     }
 
+    /**
+     * This method moves the cells on the board to the left, merging cells with the same value and updating the player's score.
+     *
+     * @param player the player whose score will be updated based on amount of merged cells
+     * @return true if any cells were moved, false otherwise
+     */
     public boolean moveCellsLeft(Player player) {
         boolean moved = false;
 
@@ -40,7 +53,6 @@ public class BoardManager implements Serializable {
                         board[i][k - 1] = new Cell(board[i][k - 1].getValue() * 2);
                         board[i][k] = new Cell(0);
 
-                        // Update score
                         player.addScore(board[i][k - 1].getValue());
 
                         moved = true;
@@ -53,6 +65,12 @@ public class BoardManager implements Serializable {
         return moved;
     }
 
+    /**
+     * This method moves the cells on the board to the right, merging cells with the same value and updating the player's score.
+     *
+     * @param player the player whose score will be updated based on amount of merged cells
+     * @return true if any cells were moved, false otherwise
+     */
     public boolean moveCellsRight(Player player) {
         for (int i = 0; i < 2; i++) rotate90Degree();
         boolean moved = moveCellsLeft(player);
@@ -61,6 +79,12 @@ public class BoardManager implements Serializable {
         return moved;
     }
 
+    /**
+     * This method moves the cells on the board up, merging cells with the same value and updating the player's score.
+     *
+     * @param player the player whose score will be updated based on amount of merged cells
+     * @return true if any cells were moved, false otherwise
+     */
     public boolean moveCellsUp(Player player) {
         for (int i = 0; i < 3; i++) rotate90Degree();
         boolean moved = moveCellsLeft(player);
@@ -69,6 +93,12 @@ public class BoardManager implements Serializable {
         return moved;
     }
 
+    /**
+     * This method moves the cells on the board down, merging cells with the same value and updating the player's score.
+     *
+     * @param player the player whose score will be updated based on amount of merged cells
+     * @return true if any cells were moved, false otherwise
+     */
     public boolean moveCellsDown(Player player) {
         rotate90Degree();
         boolean moved = moveCellsLeft(player);
@@ -77,6 +107,9 @@ public class BoardManager implements Serializable {
         return moved;
     }
 
+    /**
+     * This method rotates the game board 90 degrees clockwise.
+     */
     public void rotate90Degree() {
         Cell[][] newBoard = new Cell[board.length][board.length];
 
@@ -89,6 +122,11 @@ public class BoardManager implements Serializable {
         board = newBoard;
     }
 
+    /**
+     * This method checks if there are any cells with the same value on the board near each other.
+     *
+     * @return true if there are cells with the same value near each other, false otherwise
+     */
     public boolean isAnySameCell() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -110,9 +148,13 @@ public class BoardManager implements Serializable {
         return false;
     }
 
+    /**
+     * This method checks if the game board is full by checking if there are no empty cells and no cells with the same value near each other.
+     *
+     * @return true if the board is full, false otherwise
+     */
     public boolean isFull() {
         if (isAnySameCell()) return false;
-
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -122,6 +164,11 @@ public class BoardManager implements Serializable {
         return true;
     }
 
+    /**
+     * This method checks if there is a cell with the value of 2048 on the board.
+     *
+     * @return true if there is a cell with the value of 2048, false otherwise
+     */
     public boolean isThere2048() {
         for (Cell[] cells : board) {
             for (Cell cell : cells) {
@@ -131,6 +178,11 @@ public class BoardManager implements Serializable {
         return false;
     }
 
+    /**
+     * This method adds a new cell with the value of 2 or 4 to a random empty position on the board.
+     *
+     * @param rnd the random generator used to determine the position and value of the new cell
+     */
     public void addRandomCell(RandomGenerator rnd) {
         int x,y;
 
@@ -146,6 +198,13 @@ public class BoardManager implements Serializable {
         }
     }
 
+    /**
+     * This method checks if a cell at the specified coordinates is empty (has a value of 0).
+     *
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
+     * @return true if the cell is empty, false otherwise
+     */
     public boolean isCellEmpty(int x, int y) {
         return board[y][x].getValue() == 0;
     }

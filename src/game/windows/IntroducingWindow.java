@@ -6,6 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This class represents the introducing window of the game, which is the first window that appears when the game is launched.
+ * It has options to start a new game, load a saved game, or quit the application.
+ *
+ * @author Maksym Kulynych
+ */
 public class IntroducingWindow extends BasicWindow {
     private ArrayList<JButton> buttons;
     private final StartListener startListener;
@@ -24,6 +30,11 @@ public class IntroducingWindow extends BasicWindow {
     private final static String TITLE_LABEL_PATH = "resources/labelIcons/2048Label.png";
     private final static String BACKGROUND_IMAGE_PATH = "resources/backgrounds/introducingWindowBackground.png";
 
+    /**
+     * This constructor initializes the introducing window with the specified start listener.
+     *
+     * @param startListener the listener that will handle the start game actions
+     */
     public IntroducingWindow(StartListener startListener) {
         super("2048 - Introducing Window", 450, 600);
         this.startListener = startListener;
@@ -39,6 +50,10 @@ public class IntroducingWindow extends BasicWindow {
         frame.setLocationRelativeTo(null);
     }
 
+    /**
+     * This method initializes the buttons for starting a new game, loading a saved game, and quitting the application.
+     * It sets their icons, sizes, action listeners and adds them to the introducing panel.
+     */
     private void initButtons() {
         buttons = new ArrayList<>();
 
@@ -70,6 +85,9 @@ public class IntroducingWindow extends BasicWindow {
         }
     }
 
+    /**
+     * This method sets the location of the buttons on the introducing panel.
+     */
     private void setButtonsLocation() {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setLocation((width - BUTTON_WIDTH) / 2,
@@ -77,6 +95,9 @@ public class IntroducingWindow extends BasicWindow {
         }
     }
 
+    /**
+     * This method initializes the title label with the game logo and adds it to the introducing panel.
+     */
     private void initTitleLabel() {
         ImageIcon icon = new ImageIcon(TITLE_LABEL_PATH);
 
@@ -87,6 +108,9 @@ public class IntroducingWindow extends BasicWindow {
         introducingPanel.add(titleLabel);
     }
 
+    /**
+     * This method sets the background image of the introducing panel by adding a JLabel with the background image.
+     */
     private void setBackgroundImage() {
         ImageIcon background = new ImageIcon(BACKGROUND_IMAGE_PATH);
 
@@ -99,6 +123,9 @@ public class IntroducingWindow extends BasicWindow {
         introducingPanel.setComponentZOrder(backgroundLabel, introducingPanel.getComponentCount() - 1);
     }
 
+    /**
+     * This method initializes the introducing panel with a null layout, sets its preferred size, and adds it to the frame.
+     */
     private void initIntroducingPanel() {
         introducingPanel = new JPanel(null);
 
@@ -114,6 +141,11 @@ public class IntroducingWindow extends BasicWindow {
         return "resources/windowIcons/introducingWindowIcon.png";
     }
 
+    /**
+     * This method shows an error message with the specified message.
+     *
+     * @param message the error message to display
+     */
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }

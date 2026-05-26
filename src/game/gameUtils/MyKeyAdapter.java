@@ -6,6 +6,11 @@ import game.windows.GameWindow;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * This class is used for processing key events in game.
+ *
+ * @author Maksym Kulynych
+ */
 public class MyKeyAdapter extends KeyAdapter {
     private final BoardManager boardManager;
     private final Player player;
@@ -19,6 +24,11 @@ public class MyKeyAdapter extends KeyAdapter {
         this.gameData = gameData;
     }
 
+    /**
+     * This method processes key events for saving the game when Ctrl + S is pressed.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
@@ -26,6 +36,11 @@ public class MyKeyAdapter extends KeyAdapter {
         }
     }
 
+    /**
+     * This method processes key events for moving cells on the board.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();

@@ -4,6 +4,11 @@ import game.gameObjects.Player;
 
 import java.io.*;
 
+/**
+ * This class is used for saving and loading game data like player and board.
+ *
+ * @author Maksym Kulynych
+ */
 public class GameData implements Serializable {
     private Player player;
     private BoardManager boardManager;
@@ -13,6 +18,12 @@ public class GameData implements Serializable {
         this.boardManager = boardManager;
     }
 
+    /**
+     * This method updates game data with new player and board manager.
+     *
+     * @param player the new player
+     * @param boardManager the new board manager
+     */
     public void update(Player player, BoardManager boardManager) {
         this.player = player;
         this.boardManager = boardManager;
@@ -34,6 +45,11 @@ public class GameData implements Serializable {
         this.boardManager = boardManager;
     }
 
+    /**
+     * This method saves the current game data to a file specified by the file path.
+     *
+     * @param filePath the path of the file where the game data will be saved
+     */
     public void saveGame(String filePath) {
         try {
             FileOutputStream fos = new FileOutputStream(filePath);
@@ -50,6 +66,12 @@ public class GameData implements Serializable {
 
     }
 
+    /**
+     * This method loads game data from a file specified by the file path.
+     *
+     * @param filePath the path of the file from which the game data will be loaded
+     * @return the loaded game data, or null if an error occurs
+     */
     public static GameData loadData(String filePath) {
         try {
             FileInputStream fis = new FileInputStream(filePath);

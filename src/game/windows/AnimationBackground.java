@@ -33,7 +33,7 @@ public class AnimationBackground extends JPanel {
     /**
      * This method initializes the moving cells list with random values and positions.
      */
-    public void initCells() {
+    private void initCells() {
         for (int i = 0; i < MOVING_CELLS_COUNT; i++) {
             MovingCell movingCell = new MovingCell((int)Math.pow(2, rnd.randomNumber(2, 11)));
 

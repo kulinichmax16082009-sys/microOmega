@@ -21,6 +21,7 @@ public class Cell implements Comparable<Cell>, Serializable {
     private Color color;
 
     private final static String JSON_FILE_PATH = "resources/jsonFiles/cell.json";
+    public final static float FONT_CONSTANT = 2.6f;
 
     public Cell(int value) {
         this.value = value;
@@ -92,7 +93,7 @@ public class Cell implements Comparable<Cell>, Serializable {
         g2d.fillRoundRect(x, y, cellSize, cellSize, roundFactor, roundFactor);
 
         g2d.setColor(value <= 4 ? new Color(119,110,101) : Color.WHITE);
-        g2d.setFont(new Font("Arial", Font.BOLD, 38));
+        g2d.setFont(new Font("Arial", Font.BOLD, (int) (cellSize / FONT_CONSTANT)));
         if (value != 0) {
             String s = String.valueOf(value);
             FontMetrics fm = g2d.getFontMetrics();

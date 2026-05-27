@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class IntroducingWindow extends BasicWindow {
     private ArrayList<JButton> buttons;
     private final StartListener startListener;
-    private JPanel introducingPanel;
+    private AnimationBackground introducingPanel;
 
     private final static int BUTTON_WIDTH = 300;
     private final static int BUTTON_HEIGHT = 70;
@@ -28,7 +28,6 @@ public class IntroducingWindow extends BasicWindow {
     private final static String QUIT_BUTTON_PATH = "resources/buttonIcons/quitButtonIcon.png";
 
     private final static String TITLE_LABEL_PATH = "resources/labelIcons/2048Label.png";
-    private final static String BACKGROUND_IMAGE_PATH = "resources/backgrounds/introducingWindowBackground.png";
 
     /**
      * This constructor initializes the introducing window with the specified start listener.
@@ -38,12 +37,11 @@ public class IntroducingWindow extends BasicWindow {
     public IntroducingWindow(StartListener startListener) {
         super("2048 - Introducing Window", 450, 600);
         this.startListener = startListener;
-        initIntroducingPanel();
 
+        initIntroducingPanel();
         initTitleLabel();
         initButtons();
         setButtonsLocation();
-        setBackgroundImage();
 
         //Final settings
         frame.pack();
@@ -109,27 +107,12 @@ public class IntroducingWindow extends BasicWindow {
     }
 
     /**
-     * This method sets the background image of the introducing panel by adding a JLabel with the background image.
-     */
-    private void setBackgroundImage() {
-        ImageIcon background = new ImageIcon(BACKGROUND_IMAGE_PATH);
-
-        JLabel backgroundLabel = new JLabel(background);
-
-        backgroundLabel.setBounds(0, 0, width, height);
-
-        introducingPanel.add(backgroundLabel);
-
-        introducingPanel.setComponentZOrder(backgroundLabel, introducingPanel.getComponentCount() - 1);
-    }
-
-    /**
      * This method initializes the introducing panel with a null layout, sets its preferred size, and adds it to the frame.
      */
     private void initIntroducingPanel() {
-        introducingPanel = new JPanel(null);
+        introducingPanel = new AnimationBackground();
 
-        introducingPanel.setOpaque(false);
+        introducingPanel.setLayout(null);
 
         introducingPanel.setPreferredSize(new Dimension(width, height));
 

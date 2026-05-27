@@ -78,6 +78,30 @@ public class Cell implements Comparable<Cell>, Serializable {
         }
     }
 
+    /**
+     * This method paints the cell with its color and value to the game panel.
+     *
+     * @param g2d Graphics2D object used for painting
+     * @param x x coordinate of the cell on the board
+     * @param y y coordinate of the cell on the board
+     * @param cellSize size of the cell that will be painted
+     * @param roundFactor factor for rounding corners of the cell
+     */
+    public void paint(Graphics2D g2d, int x, int y, int cellSize, int roundFactor) {
+        g2d.setColor(color);
+        g2d.fillRoundRect(x, y, cellSize, cellSize, roundFactor, roundFactor);
+
+        g2d.setColor(value <= 4 ? new Color(119,110,101) : Color.WHITE);
+        g2d.setFont(new Font("Arial", Font.BOLD, 38));
+        if (value != 0) {
+            String s = String.valueOf(value);
+            FontMetrics fm = g2d.getFontMetrics();
+            int strWidth = fm.stringWidth(s);
+            int strHeight = -(int) fm.getLineMetrics(s, g2d).getBaselineOffsets()[2];
+            g2d.drawString(s, x + (cellSize - strWidth) / 2, y + cellSize - (cellSize - strHeight) / 2 - 5);
+        }
+    }
+
     public int getValue() {
         return value;
     }

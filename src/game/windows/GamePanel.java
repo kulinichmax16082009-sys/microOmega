@@ -46,18 +46,7 @@ public class GamePanel extends JPanel {
                 int x = GameWindow.CELL_SIZE * j + (GameWindow.GAP_SIZE) * j + GameWindow.GAP_SIZE;
                 int y = GameWindow.CELL_SIZE * i + (GameWindow.GAP_SIZE) * i + GameWindow.GAP_SIZE;
 
-                g2d.setColor(boardManager.getBoard()[i][j].getColor());
-                g2d.fillRoundRect(x, y, GameWindow.CELL_SIZE, GameWindow.CELL_SIZE, 15, 15);
-
-                g2d.setColor(boardManager.getBoard()[i][j].getValue() <= 4 ? new Color(0x776e65) : Color.WHITE);
-                g2d.setFont(new Font("Arial", Font.BOLD, 38));
-                if (boardManager.getBoard()[i][j].getValue() != 0) {
-                    String s = String.valueOf(boardManager.getBoard()[i][j].getValue());
-                    FontMetrics fm = g2d.getFontMetrics();
-                    int strWidth = fm.stringWidth(s);
-                    int strHeight = -(int) fm.getLineMetrics(s, g2d).getBaselineOffsets()[2];
-                    g2d.drawString(s, x + (GameWindow.CELL_SIZE - strWidth) / 2, y + GameWindow.CELL_SIZE - (GameWindow.CELL_SIZE - strHeight) / 2 - 5);
-                }
+                boardManager.getBoard()[i][j].paint(g2d, x, y, GameWindow.CELL_SIZE, 15);
             }
         }
     }

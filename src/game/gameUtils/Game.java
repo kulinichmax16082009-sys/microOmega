@@ -19,16 +19,19 @@ public class Game implements StartListener {
     private EndWindow endWindow;
     private Timer timer;
     private GameData gameData;
+    private final FileManager fileManager;
 
     private BoardManager boardManager;
     private Player player;
 
     public static final String SAVE_LOAD_PATH = "resources/save.dat";
+    public static final String STATS_SAVE_PATH = "resources/txtFiles/stats.txt";
 
     public Game() {
         this.player = new Player();
         this.boardManager = new BoardManager(GameWindow.CELLS_COUNT);
         this.gameData = new GameData(player, boardManager);
+        this.fileManager = new FileManager();
     }
 
     /**
@@ -66,6 +69,7 @@ public class Game implements StartListener {
         if (goodEnd || badEnd) {
             endWindow = new EndWindow(player);
             stopTimer();
+            fileManager.saveStats(player, STATS_SAVE_PATH);
             gameWindow.close();
         }
 

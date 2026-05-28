@@ -25,7 +25,7 @@ public class Game implements StartListener {
     private Player player;
 
     public static final String SAVE_LOAD_PATH = "resources/save.dat";
-    public static final String STATS_SAVE_PATH = "resources/txtFiles/stats.txt";
+    public static final String STATS_SAVE_PATH = "resources/stats.txt";
 
     public Game() {
         this.player = new Player();

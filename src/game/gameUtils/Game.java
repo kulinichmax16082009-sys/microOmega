@@ -69,12 +69,17 @@ public class Game implements StartListener {
         if (goodEnd || badEnd) {
             endWindow = new EndWindow(player);
             stopTimer();
-            fileManager.saveStats(player, STATS_SAVE_PATH);
             gameWindow.close();
         }
 
-        if (badEnd) endWindow.initBadEnd();
-        else if (goodEnd) endWindow.initGoodEnd();
+        if (badEnd) {
+            endWindow.initBadEnd();
+            fileManager.saveStats(player, STATS_SAVE_PATH, false);
+        }
+        else if (goodEnd) {
+            endWindow.initGoodEnd();
+            fileManager.saveStats(player, STATS_SAVE_PATH, true);
+        }
     }
 
     /**
